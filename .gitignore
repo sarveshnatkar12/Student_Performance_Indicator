@@ -11,6 +11,4 @@ __pycache__/
 # Local settings
 .env
 
-# Project structure
-setup.py
-src/
+
