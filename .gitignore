@@ -1,1 +1,16 @@
+# Virtual environment
+ML-env/
 
+# Build artifacts
+*.egg-info/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Local settings
+.env
+
+# Project structure
+setup.py
+src/
