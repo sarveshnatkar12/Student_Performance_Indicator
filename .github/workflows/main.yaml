@@ -10,7 +10,7 @@ env:
   ECS_SERVICE: student-performance-service
   ECS_CLUSTER: student-performance-cluster
   ECS_TASK_DEFINITION: .aws/task-def.json
-  CONTAINER_NAME: student-performance  # Must match container name in task definition
+  CONTAINER_NAME: student-performance
 
 permissions:
   contents: read
@@ -18,7 +18,7 @@ permissions:
 jobs:
   deploy:
     name: Deploy to ECS
-    runs-on: self-hosted  # Make sure the runner is running on EC2
+    runs-on: self-hosted
     environment: production
 
     steps:
@@ -44,7 +44,9 @@ jobs:
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_ENV
+          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> "$GITHUB_OUTPUT"
+        outputs:
+          image: ${{ steps.build-image.outputs.image }}
 
       - name: Replace image in ECS task definition
         id: task-def
@@ -52,7 +54,7 @@ jobs:
         with:
           task-definition: ${{ env.ECS_TASK_DEFINITION }}
           container-name: ${{ env.CONTAINER_NAME }}
-          image: ${{ env.image }}
+          image: ${{ steps.build-image.outputs.image }}
 
       - name: Deploy to Amazon ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
