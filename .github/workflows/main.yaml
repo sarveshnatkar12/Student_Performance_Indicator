@@ -10,8 +10,7 @@ env:
   ECS_SERVICE: student-performance-service
   ECS_CLUSTER: student-performance-cluster
   ECS_TASK_DEFINITION: .aws/task-def.json
-  CONTAINER_NAME: student-performance
-               # Container name in task definition
+  CONTAINER_NAME: student-performance # Container name in task definition
 
 permissions:
   contents: read
