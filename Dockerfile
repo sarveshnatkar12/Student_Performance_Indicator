@@ -7,8 +7,9 @@ COPY . .
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-# Run data_ingestion.py to generate artifacts (model.pkl, etc.)
-RUN python -m src/pipeline/data_ingestion
+# (Make sure 'artifacts/' folder will exist or be created by the script)
+RUN python -m src.pipeline.data_ingestion
+
 
 EXPOSE 6120
 
