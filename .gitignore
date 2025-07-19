@@ -11,8 +11,5 @@ __pycache__/
 # Local settings
 .env
 
-# Project artifacts
-artifacts/
-
 #logs
 logs/
