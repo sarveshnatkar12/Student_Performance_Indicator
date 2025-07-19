@@ -1,8 +1,8 @@
 name: Deploy to EC2 using ECR
 
 on:
-  push:
-    branches: [ "main" ]
+  workflow_dispatch:
+
 
 env:
   AWS_REGION: ${{ secrets.AWS_REGION }}
