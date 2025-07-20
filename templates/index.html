@@ -2,65 +2,170 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome | Student Predictor</title>
+    <title>Student Performance Indicator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An AI-powered web app to predict student math scores based on reading, writing, and academic inputs. Ideal for students, parents, and educators.">
     <style>
+        :root {
+            --bg-color: #f4f7f8;
+            --text-color: #333;
+            --card-bg: #fff;
+            --btn-bg: #4A67F8;
+            --btn-color: #fff;
+        }
+
+        body.dark-mode {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --card-bg: #1e1e1e;
+            --btn-bg: #6c63ff;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #c3ecf7, #f9f9f9);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
-            text-align: center;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
         }
 
-        .welcome-box {
-            background-color: white;
-            padding: 50px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
+        header {
+            padding: 20px;
+            text-align: right;
         }
 
-        h1 {
-            font-size: 2.8rem;
-            color: #2c3e50;
+        .toggle-switch {
+            cursor: pointer;
+            padding: 8px 15px;
+            border-radius: 5px;
+            background-color: var(--btn-bg);
+            color: var(--btn-color);
+            font-weight: bold;
+            border: none;
         }
 
-        p {
-            font-size: 1.2rem;
-            color: #555;
-            margin-top: 10px;
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .info {
+            flex: 1;
+        }
+
+        .info h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .info p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
             line-height: 1.6;
         }
 
-        .btn-start {
-            margin-top: 30px;
+        .info ul {
+            padding-left: 20px;
+        }
+
+        .image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .start-btn {
+            background-color: var(--btn-bg);
+            color: var(--btn-color);
             padding: 12px 25px;
             font-size: 1rem;
-            background-color: #4CAF50;
-            color: white;
             border: none;
             border-radius: 6px;
             cursor: pointer;
+            font-weight: bold;
             text-decoration: none;
-            transition: background-color 0.3s;
+            display: inline-block;
+            margin-top: 15px;
+            transition: all 0.2s ease-in-out;
         }
 
-        .btn-start:hover {
-            background-color: #388e3c;
+        .start-btn:hover {
+            background-color: #3d53cc;
+            transform: scale(1.05);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #888;
+        }
+
+        @media screen and (max-width: 768px) {
+            .container {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+
+            .info h1 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="welcome-box">
-        <h1>🎓 Welcome to Student Exam Predictor!</h1>
-        <p>
-            Get quick predictions of a student's math score using smart ML insights 📊.<br>
-            Just enter a few details — we’ll handle the rest!
-        </p>
-        <a href="/predictdata" class="btn-start">Start Prediction</a>
+
+    <header>
+        <button class="toggle-switch" onclick="toggleDarkMode()">Toggle Dark Mode 🌙</button>
+    </header>
+
+    <div class="container">
+        <div class="info">
+            <h1>🎓 Welcome to Student Performance Indicator</h1>
+            <p>
+                This smart web app uses AI to predict a student's <strong>math performance</strong> based on academic and background inputs.
+            </p>
+            <p>
+                Whether you're a student, parent, or teacher — this tool can help you:
+                <ul>
+                    <li>🎯 Identify learning gaps early</li>
+                    <li>📚 Strategically improve study methods and bridge learning gaps.</li>
+                </ul>
+            </p>
+
+            <p>
+                <strong>How it works:</strong><br>
+                Our ML model takes your inputs and predicts a student's math score instantly. No technical knowledge required — just fill the form and gain insights!
+            </p>
+
+            <a class="start-btn" href="/predictdata">🚀 Start Prediction</a>
+        </div>
+
+        <div class="image">
+            <img src="{{ url_for('static', filename='student_illustration.png') }}" alt="Student Illustration">
+        </div>
     </div>
+
+    <footer>
+        &copy; 2025 Student Performance Indicator — Empowering education with AI.
+    </footer>
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+        }
+    </script>
 </body>
 </html>

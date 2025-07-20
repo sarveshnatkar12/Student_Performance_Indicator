@@ -16,3 +16,5 @@ artifacts/
 
 #logs
 logs/
+
+static/

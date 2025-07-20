@@ -2,226 +2,224 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Student Performance Predictor</title>
+    <title>Student Performance Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        :root {
+            --bg-color: #f9f9f9;
+            --text-color: #111;
+            --form-bg: #fff;
+            --btn-bg: #4A67F8;
+            --btn-color: #fff;
+        }
+
+        body.dark-mode {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --form-bg: #1e1e1e;
+            --btn-bg: #6c63ff;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f4f7f8;
             margin: 0;
-            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
         }
 
-        .container {
-            width: 60%;
-            margin: auto;
-            margin-top: 50px;
-            background-color: #ffffff;
-            padding: 30px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
+        header {
+            padding: 15px;
+            text-align: right;
         }
 
-        h2 {
+        .toggle-switch {
+            cursor: pointer;
+            padding: 8px 16px;
+            background-color: var(--btn-bg);
+            color: var(--btn-color);
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        h1 {
             text-align: center;
-            color: #333333;
-            margin-bottom: 30px;
+            margin-top: 20px;
         }
 
         form {
-            display: flex;
-            flex-direction: column;
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 30px;
+            background-color: var(--form-bg);
+            border-radius: 16px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
         label {
-            margin-top: 15px;
-            font-weight: 600;
-            color: #444;
+            display: block;
+            margin: 15px 0 5px;
         }
 
         input, select {
+            width: 100%;
             padding: 10px;
-            border: 1px solid #cccccc;
-            border-radius: 5px;
-            margin-top: 5px;
-            font-size: 14px;
-        }
-
-        button {
-            margin-top: 30px;
-            padding: 12px;
-            font-size: 16px;
-            font-weight: bold;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        .result {
-            margin-top: 30px;
-            padding: 20px;
-            background-color: #e7f5e6;
-            border-left: 6px solid #4CAF50;
-            font-size: 18px;
-            color: #2e7d32;
-            font-weight: bold;
             border-radius: 8px;
+            border: 1px solid #ccc;
+            background-color: var(--bg-color);
+            color: var(--text-color);
         }
 
-        .feedback {
-            font-size: 1.5rem;
+        input::placeholder {
+            color: #888;
+        }
+
+        .btn {
+            width: 100%;
+            margin-top: 15px;
+            background-color: var(--btn-bg);
+            color: var(--btn-color);
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-reset {
+            background-color: #888;
             margin-top: 10px;
         }
 
-        .progress-container {
-            margin-top: 20px;
-            background-color: #ddd;
-            border-radius: 20px;
-            overflow: hidden;
-            height: 25px;
-        }
-
-        .progress-bar {
-            height: 100%;
+        .result-box {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: var(--form-bg);
+            padding: 20px;
+            border-radius: 16px;
             text-align: center;
-            line-height: 25px;
-            color: white;
-            font-weight: bold;
-            transition: width 1s ease;
-        }
-
-        .download-btn {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #2196F3;
-            color: white;
-            font-weight: bold;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
         footer {
-            margin-top: 50px;
             text-align: center;
-            color: #aaa;
+            padding: 20px;
+            color: #888;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Student Performance Prediction Form</h2>
-        <form action="/predictdata" method="POST">
-            <label for="gender">Gender:</label>
-            <select name="gender" required>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-            </select>
 
-            <label for="ethnicity">Race/Ethnicity:</label>
-            <select name="ethnicity" required>
-                <option value="group A">Group A</option>
-                <option value="group B">Group B</option>
-                <option value="group C">Group C</option>
-                <option value="group D">Group D</option>
-                <option value="group E">Group E</option>
-            </select>
+<header>
+    <button class="toggle-switch" onclick="toggleDarkMode()">Toggle Dark Mode 🌙</button>
+</header>
 
-            <label for="parental_level_of_education">Parental Level of Education:</label>
-            <select name="parental_level_of_education" required>
-                <option value="associate's degree">Associate's Degree</option>
-                <option value="bachelor's degree">Bachelor's Degree</option>
-                <option value="master's degree">Master's Degree</option>
-                <option value="some college">Some College</option>
-                <option value="some high school">Some High School</option>
-                <option value="high school">High School</option>
-            </select>
+<h1>📊 Student Performance Prediction</h1>
 
-            <label for="lunch">Lunch:</label>
-            <select name="lunch" required>
-                <option value="standard">Standard</option>
-                <option value="free/reduced">Free/Reduced</option>
-            </select>
+<form action="/predictdata" method="post" id="performanceForm">
+    <label for="gender">Gender:</label>
+    <select name="gender" required id="gender">
+        <option value="">--Select--</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+    </select>
 
-            <label for="test_preparation_course">Test Preparation Course:</label>
-            <select name="test_preparation_course" required>
-                <option value="none">None</option>
-                <option value="completed">Completed</option>
-            </select>
+    <label for="ethnicity">Race/Ethnicity:</label>
+    <select name="ethnicity" required id="ethnicity">
+        <option value="">--Select--</option>
+        <option value="group A">Group A</option>
+        <option value="group B">Group B</option>
+        <option value="group C">Group C</option>
+        <option value="group D">Group D</option>
+        <option value="group E">Group E</option>
+    </select>
 
-            <label for="reading_score">Reading Score:</label>
-            <input type="number" name="reading_score" min="0" max="100" required>
+    <label for="parental_level_of_education">Parental Level of Education:</label>
+    <select name="parental_level_of_education"
+            title="Choose the highest qualification of your parent or guardian. Helps us analyze the home education environment."
+            required id="parental_level_of_education">
+        <option value="">--Select--</option>
+        <option value="some high school">Some High School</option>
+        <option value="high school">High School</option>
+        <option value="some college">Some College</option>
+        <option value="associate's degree">Associate's Degree</option>
+        <option value="bachelor's degree">Bachelor's Degree</option>
+        <option value="master's degree">Master's Degree</option>
+    </select>
 
-            <label for="writing_score">Writing Score:</label>
-            <input type="number" name="writing_score" min="0" max="100" required>
+    <label for="lunch">Lunch Type:</label>
+    <select name="lunch"
+            title="Free/Reduced lunch often reflects students from lower-income families. This can impact learning access."
+            required id="lunch">
+        <option value="">--Select--</option>
+        <option value="standard">Standard</option>
+        <option value="free/reduced">Free/Reduced</option>
+    </select>
 
-            <button type="submit">Predict</button>
-        </form>
+    <label for="test_preparation_course">Test Preparation Course:</label>
+    <select name="test_preparation_course"
+            title="Shows if student has taken a formal prep course before the exam. Prepped students tend to score better."
+            required id="test_preparation_course">
+        <option value="">--Select--</option>
+        <option value="none">None</option>
+        <option value="completed">Completed</option>
+    </select>
 
-        {% if results %}
-        <div class="result">
-            Predicted Score: <strong>{{ results }}%</strong>
+    <label for="reading_score">Reading Score:</label>
+    <input type="number" name="writing_score" id="reading_score" min="0" max="100"
+           title="Enter your reading exam score. Reflects comprehension and interpretation skills." required>
 
-            <div class="feedback">
-                {% if results >= 90 %}
-                    🌟 Outstanding!
-                {% elif results >= 80 %}
-                    👏 Great Job!
-                {% elif results >= 60 %}
-                    👍 Good Effort!
-                {% else %}
-                    💪 Keep Practicing!
-                {% endif %}
-            </div>
+    <label for="writing_score">Writing Score:</label>
+    <input type="number" name="reading_score" id="writing_score" min="0" max="100"
+           title="Enter your writing exam score. Reflects grammar, coherence and written communication." required>
 
-            <div class="progress-container">
-                <div class="progress-bar" id="progressBar" style="width: {{ results }}%;">
-                    {{ results }}%
-                </div>
-            </div>
+    <button type="submit" class="btn">Predict Performance</button>
+    <button type="reset" class="btn btn-reset" onclick="clearPrediction()">Reset</button>
+</form>
 
-            <button class="download-btn" onclick="downloadResult({{ results }})">Download Result</button>
-        </div>
+{% if results %}
+<div class="result-box" id="resultBox">
+    📌 <strong>Predicted Math Score:</strong> {{ results }} <br><br>
 
-        <audio id="successAudio" src="https://www.soundjay.com/buttons/sounds/button-29.mp3" preload="auto"></audio>
-        <audio id="failAudio" src="https://www.soundjay.com/button/sounds/beep-10.mp3" preload="auto"></audio>
+    {% if results < 50 %}
+        ⚠️ You may need to focus more on Math concepts. Try using additional support like online tutorials or asking for help.
+    {% elif results < 70 %}
+        👍 You are doing okay, but there's room to grow. Try practicing consistently to boost your score.
+    {% elif results < 90 %}
+        ✅ You're doing well! Just a bit more effort and you could reach top scores.
+    {% else %}
+        🌟 Excellent! Your math preparation is on point.
+    {% endif %}
+</div>
+{% endif %}
 
-        <script>
-            const score = {{ results }};
-            const bar = document.getElementById('progressBar');
-            if (score >= 90) {
-                bar.style.backgroundColor = '#4CAF50'; // green
-                document.getElementById('successAudio').play();
-            } else if (score >= 70) {
-                bar.style.backgroundColor = '#FFC107'; // amber
-                document.getElementById('successAudio').play();
-            } else {
-                bar.style.backgroundColor = '#F44336'; // red
-                document.getElementById('failAudio').play();
+<footer>
+    &copy; 2025 Student Performance Indicator — Empowering students with AI.
+</footer>
+
+<script>
+    function toggleDarkMode() {
+        document.body.classList.toggle("dark-mode");
+    }
+
+    function clearPrediction() {
+        const box = document.getElementById("resultBox");
+        if (box) box.remove();
+    }
+
+    // Autofill form with previous inputs after prediction (to preserve inputs without interfering with reset)
+    window.onload = function () {
+        const data = {{ request.form | tojson }};
+        for (const key in data) {
+            const input = document.getElementsByName(key)[0];
+            if (input) {
+                input.value = data[key];
             }
+        }
+    };
+</script>
 
-            function downloadResult(score) {
-                const element = document.createElement("a");
-                const text = `Student Performance Prediction\nPredicted Score: ${score}%`;
-                const file = new Blob([text], { type: 'text/plain' });
-                element.href = URL.createObjectURL(file);
-                element.download = "student_prediction_result.txt";
-                document.body.appendChild(element);
-                element.click();
-                document.body.removeChild(element);
-            }
-        </script>
-        {% endif %}
-    </div>
-
-    <footer>
-        <p>&copy; 2025 Student Performance Predictor</p>
-    </footer>
 </body>
 </html>
