@@ -6,8 +6,6 @@ WORKDIR /app
 # Copy entire project
 COPY . /app
 
-# Install AWS CLI (optional but was in your course)
-RUN apt update -y && apt install -y awscli
 
 # Install Python dependencies
 RUN pip install --upgrade pip
