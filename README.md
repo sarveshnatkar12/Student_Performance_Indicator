@@ -1,6 +1,6 @@
 # 🎓 Student Performance Indicator
 
-🔗 **Live App:** [http://student-performance-app.duckdns.org/](http://student-performance-app.duckdns.org/)
+🔗 **Live App:** [http://student-performance-app.duckdns.org/](http://student-performance-app.duckdns.org:6120/)
 
 This is a full-stack machine learning application that predicts a student's **math score** based on inputs like gender, parental education, reading and writing scores, lunch type, and test preparation.
 
